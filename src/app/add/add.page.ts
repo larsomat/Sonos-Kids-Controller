@@ -32,6 +32,7 @@ export class AddPage implements OnInit, AfterViewInit {
   @ViewChild('spotify_artist', { static: false }) spotifyArtist: IonInput;
   @ViewChild('spotify_id', { static: false }) spotifyID: IonInput;
   @ViewChild('spotify_artistid', { static: false }) spotifyArtistID: IonInput;
+  @ViewChild('spotify_showid', { static: false }) spotifyShowID: IonInput;
   @ViewChild('spotify_title', { static: false }) spotifyTitle: IonInput;
   @ViewChild('spotify_query', { static: false }) spotifyQuery: IonInput;
   @ViewChild('amazonmusic_artist', { static: false }) amazonmusicArtist: IonInput;
@@ -55,6 +56,7 @@ export class AddPage implements OnInit, AfterViewInit {
 
   categoryIcons = {
     audiobook: 'book-outline',
+    show: 'prism-outline',
     music: 'musical-notes-outline',
     playlist: 'document-text-outline',
     radio: 'radio-outline'
@@ -200,6 +202,7 @@ export class AddPage implements OnInit, AfterViewInit {
       if (form.form.value.spotify_query?.length) { media.query = form.form.value.spotify_query; }
       if (form.form.value.spotify_id?.length) { media.id = form.form.value.spotify_id; }
       if (form.form.value.spotify_artistid?.length) { media.artistid = form.form.value.spotify_artistid; }
+      if (form.form.value.spotify_showid?.length) { media.showid = form.form.value.spotify_showid; }
 
     } else if (this.source === 'library') {
       if (form.form.value.library_artist?.length) { media.artist = form.form.value.library_artist; }
@@ -232,6 +235,7 @@ export class AddPage implements OnInit, AfterViewInit {
     this.keyboard.clearInput('spotify_title');
     this.keyboard.clearInput('spotify_id');
     this.keyboard.clearInput('spotify_artistid');
+    this.keyboard.clearInput('spotify_showid');
     this.keyboard.clearInput('spotify_query');
 
     this.keyboard.clearInput('library_artist');
@@ -281,6 +285,7 @@ export class AddPage implements OnInit, AfterViewInit {
 
     switch (this.category) {
       case 'audiobook':
+			case 'show':
       case 'music':
         if (this.tuneinSegment) { this.tuneinSegment.disabled = true; }
         break;
@@ -304,10 +309,11 @@ export class AddPage implements OnInit, AfterViewInit {
       const title = this.keyboard.getInput('spotify_title');
       const id = this.keyboard.getInput('spotify_id');
       const artistid = this.keyboard.getInput('spotify_artistid');
+      const showid = this.keyboard.getInput('spotify_showid');
       const query = this.keyboard.getInput('spotify_query');
 
       this.valid = (
-        (this.category === 'audiobook' || this.category === 'music') && (
+        (this.category === 'audiobook' || this.category === 'music' || this.category === 'show') && (
           (title?.length > 0 && artist?.length > 0 && !(query?.length > 0) && !(id?.length > 0) && !(artistid?.length > 0))
           ||
           (query?.length > 0 && !(title?.length > 0) && !(id?.length > 0) && !(artistid?.length > 0))
@@ -315,6 +321,8 @@ export class AddPage implements OnInit, AfterViewInit {
           (id?.length > 0 && !(query?.length > 0))
           ||
           (artistid?.length > 0 && !(query?.length > 0))
+					||
+					(showid?.length > 0 && !(query?.length > 0))
         )
         ||
         this.category === 'playlist' && id?.length > 0

@@ -86,7 +86,11 @@ export class PlayerService {
           url = 'spotify/now/spotify:user:spotify:playlist:' + encodeURIComponent(media.id);
         } else {
           if (media.id) {
-            url = 'spotify/now/spotify:album:' + encodeURIComponent(media.id);
+          	if(media.category === 'show') {
+							url = 'spotify/now/spotify:episode:' + encodeURIComponent(media.id);
+						} else {
+							url = 'spotify/now/spotify:album:' + encodeURIComponent(media.id);
+						}
           } else {
             url = 'musicsearch/spotify/album/artist:"' + encodeURIComponent(media.artist) + '" album:"' + encodeURIComponent(media.title) + '"';
           }

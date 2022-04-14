@@ -10,6 +10,9 @@
             <ion-segment-button value="audiobook">
                 <ion-icon name="book-outline"></ion-icon>
             </ion-segment-button>
+            <ion-segment-button value="show">
+                <ion-icon name="prism-outline"></ion-icon>
+            </ion-segment-button>
             <ion-segment-button value="music">
                 <ion-icon name="musical-notes-outline"></ion-icon>
             </ion-segment-button>
@@ -55,7 +58,7 @@
             </ion-slide>
         </ion-slides>
     </ng-template>
-    
+
     <ng-template #mediaBlock>
         <ion-slides [options]="slideOptions" scrollbar="true" #media_slider>
             <ion-slide *ngFor="let currentMedia of media">

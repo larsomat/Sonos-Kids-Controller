@@ -2,6 +2,7 @@
     <ion-toolbar color="light">
         <ion-select #select interface="popover" [(ngModel)]="category" (ionChange)="categoryChanged()" cancelText="Cancel" okText="Ok">
             <ion-select-option value="audiobook">Radio Play / Audio Book</ion-select-option>
+            <ion-select-option value="show">Show / Podcast</ion-select-option>
             <ion-select-option value="music">Music</ion-select-option>
             <ion-select-option value="playlist">Playlist</ion-select-option>
             <ion-select-option value="radio">Radio</ion-select-option>
@@ -92,6 +93,7 @@
                                     <ion-select #searchTypeSelect interface="popover" [(ngModel)]="searchType" name="searchType" (ionChange)="searchTypeChanged()">
                                         <ion-select-option value="artist_title">Artist + Title</ion-select-option>
                                         <ion-select-option value="artist_id">Artist ID</ion-select-option>
+                                        <ion-select-option value="show_id">Show ID</ion-select-option>
                                         <ion-select-option value="media_id">Media ID</ion-select-option>
                                         <ion-select-option value="query">Search Query</ion-select-option>
                                       </ion-select>
@@ -115,6 +117,7 @@
                                     <ion-input *ngSwitchCase="'media_id'" #spotify_id name="spotify_id" type="text" placeholder="Media ID" (ionInput)="inputChanged($event)" (ionFocus)="focusChanged($event)" ngModel></ion-input>
                                     <ion-input *ngSwitchCase="'query'" #spotify_query name="spotify_query" type="text" placeholder="Search Query" (ionInput)="inputChanged($event)" (ionFocus)="focusChanged($event)" ngModel></ion-input>
                                     <ion-input *ngSwitchCase="'artist_id'" #spotify_artistid name="spotify_artistid" type="text" placeholder="Unique Artist ID" (ionInput)="inputChanged($event)" (ionFocus)="focusChanged($event)" ngModel></ion-input>
+                                    <ion-input *ngSwitchCase="'show_id'" #spotify_showid name="spotify_showid" type="text" placeholder="Unique Show/Podcast ID" (ionInput)="inputChanged($event)" (ionFocus)="focusChanged($event)" ngModel></ion-input>
                                 </ion-item>
                             </div>
                         </ion-col>

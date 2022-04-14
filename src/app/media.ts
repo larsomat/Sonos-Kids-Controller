@@ -4,6 +4,7 @@ export interface Media {
     query?: string;
     id?: string;
     artistid?: string;
+    showid?: string;
     cover?: string;
     type: string;
     category: string;
