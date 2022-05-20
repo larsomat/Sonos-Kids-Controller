@@ -97,7 +97,7 @@ export class HomePage implements OnInit {
   }
 
   update() {
-    if (this.category === 'audiobook' || this.category === 'music') {
+    if (this.category === 'audiobook' || this.category === 'music' || this.category === 'show') {
       this.mediaService.publishArtists();
     } else {
       this.mediaService.publishMedia();

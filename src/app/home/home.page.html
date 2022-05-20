@@ -32,7 +32,7 @@
 </ion-header>
 
 <ion-content>
-    <div *ngIf="category === 'audiobook' || category === 'music'; then artistBlock else mediaBlock"></div>
+    <div *ngIf="category === 'audiobook' || category === 'music' || category === 'show'; then artistBlock else mediaBlock"></div>
 
     <ng-template #artistBlock>
         <ion-slides [options]="slideOptions" scrollbar="true" #artist_slider>
