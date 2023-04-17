@@ -8,6 +8,7 @@ import { ParentalService } from '../parental.service';
 import { ActivityIndicatorService } from '../activity-indicator.service';
 import { Artist } from '../artist';
 import { Media } from '../media';
+import { interval} from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -77,6 +78,12 @@ export class HomePage implements OnInit {
       this.artistSlider?.update();
     });
 
+    // Retrieve the hasPlaytime status every 5 seconds
+    interval(5000).subscribe(() => {
+      this.parentalService.hasPlaytime().subscribe(hasPlaytime => {
+        this.hasPlaytime = hasPlaytime;
+      });
+    });
 
     // Retreive the hasPlaytime status
     this.parentalService.hasPlaytime().subscribe(hasPlaytime => {
