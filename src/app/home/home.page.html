@@ -32,8 +32,14 @@
 </ion-header>
 
 <ion-content>
-    <div *ngIf="category === 'audiobook' || category === 'music' || category === 'show'; then artistBlock else mediaBlock"></div>
 
+    <ng-container *ngIf="!hasPlaytime">
+        <div class="overlay">
+            <p>Keine Spielzeit</p>
+        </div>
+    </ng-container>
+
+    <div *ngIf="category === 'audiobook' || category === 'music' || category === 'show'; then artistBlock else mediaBlock"></div>
     <ng-template #artistBlock>
         <ion-slides [options]="slideOptions" scrollbar="true" #artist_slider>
             <ion-slide *ngFor="let currentArtist of artists">

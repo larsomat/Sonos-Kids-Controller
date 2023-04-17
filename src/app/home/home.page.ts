@@ -4,6 +4,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { MediaService } from '../media.service';
 import { ArtworkService } from '../artwork.service';
 import { PlayerService } from '../player.service';
+import { ParentalService } from '../parental.service';
 import { ActivityIndicatorService } from '../activity-indicator.service';
 import { Artist } from '../artist';
 import { Media } from '../media';
@@ -25,6 +26,7 @@ export class HomePage implements OnInit {
   activityIndicatorVisible = false;
   editButtonclickCount = 0;
   editClickTimer = 0;
+  hasPlaytime = true;
 
   needsUpdate = false;
 
@@ -45,7 +47,8 @@ export class HomePage implements OnInit {
     private artworkService: ArtworkService,
     private playerService: PlayerService,
     private activityIndicatorService: ActivityIndicatorService,
-    private router: Router
+    private router: Router,
+    private parentalService: ParentalService
   ) {}
 
   ngOnInit() {
@@ -72,6 +75,12 @@ export class HomePage implements OnInit {
         });
       });
       this.artistSlider?.update();
+    });
+
+
+    // Retreive the hasPlaytime status
+    this.parentalService.hasPlaytime().subscribe(hasPlaytime => {
+      this.hasPlaytime = hasPlaytime;
     });
 
     this.update();
