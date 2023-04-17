@@ -18,7 +18,7 @@ export class ParentalService {
 
   getConfig(): Observable<ParentalConfig> {
     if (!this.config) {
-      const url = 'http://localhost:7005/playtime';
+      const url = 'http://sonoskids:7005/playtime';
 
       this.config = this.http.get<ParentalConfig>(url);
     }
