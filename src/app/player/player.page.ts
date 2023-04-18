@@ -3,7 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { ArtworkService } from '../artwork.service';
 import { PlayerService, PlayerCmds } from '../player.service';
+import { ParentalService } from '../parental.service';
 import { Media } from '../media';
+import { interval} from 'rxjs';
 
 @Component({
   selector: 'app-player',
@@ -15,12 +17,14 @@ export class PlayerPage implements OnInit {
   media: Media;
   cover = '';
   playing = true;
+  hasPlaytime = true;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private artworkService: ArtworkService,
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    private parentalService: ParentalService
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -30,9 +34,23 @@ export class PlayerPage implements OnInit {
   }
 
   ngOnInit() {
+    
     this.artworkService.getArtwork(this.media).subscribe(url => {
       this.cover = url;
     });
+
+    // Retrieve the hasPlaytime status every 5 seconds
+    interval(5000).subscribe(() => {
+      this.parentalService.hasPlaytime().subscribe(hasPlaytime => {
+        this.hasPlaytime = hasPlaytime;
+      });
+    });
+
+    // Retreive the hasPlaytime status
+    this.parentalService.hasPlaytime().subscribe(hasPlaytime => {
+      this.hasPlaytime = hasPlaytime;
+    });
+    
   }
 
   ionViewWillEnter() {
