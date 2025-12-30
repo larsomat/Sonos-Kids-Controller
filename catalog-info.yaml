@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: Sonos-Kids-Controller
+  annotations:
+    github.com/project-slug: larsomat/Sonos-Kids-Controller
+spec:
+  type: other
+  lifecycle: unknown
+  owner: guests
